@@ -1,9 +1,10 @@
 using UnityEngine;
+using Unity.Netcode;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [SelectionBase]
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputHandler : NetworkBehaviour
 {
     Rigidbody2D m_RB;
     InputSystem_Actions m_PlayerActions;
@@ -29,18 +30,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     void Handle_JumpPressed(InputAction.CallbackContext ctx)
     {
+        if (!IsOwner) return;
         m_RB.AddForce(Vector3.up * 5, ForceMode2D.Impulse);
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
