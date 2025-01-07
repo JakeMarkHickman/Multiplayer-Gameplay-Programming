@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Assets/UI/StyleSheet/CharacterSelectStyle.uss?fileID=7433441132597879392&amp;guid=9455c35b621a8f040bb084948f5f9c5f&amp;type=3#CharacterSelectStyle" />
+    <ui:GroupBox style="flex-direction: row; align-self: stretch; justify-content: space-evenly; position: absolute; top: 0; right: 0; bottom: 0; left: 0;">
+        <ui:Button text="Rogue" name="rouge_BTN" class="btn-select" style="top: 0; left: 0; bottom: 0; position: absolute; right: 50%; -unity-text-align: lower-center; font-size: 64px; -unity-font-style: bold; -unity-font-definition: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;); color: rgb(80, 80, 80);" />
+        <ui:Button text="Crafter&#10;" name="crafter_BTN" class="btn-select" style="position: absolute; top: 0; right: 0; bottom: 0; left: 50%; -unity-text-align: lower-center; font-size: 64px; -unity-font-style: bold; -unity-font-definition: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;); color: rgb(79, 79, 79);" />
+        <ui:Button text="Random" class="btn-select" style="height: 135px; width: 174px; right: 0; top: 0; position: absolute; bottom: auto; -unity-font-definition: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;); font-size: 32px; -unity-font-style: bold; color: rgb(80, 80, 80);" />
+    </ui:GroupBox>
+</ui:UXML>
