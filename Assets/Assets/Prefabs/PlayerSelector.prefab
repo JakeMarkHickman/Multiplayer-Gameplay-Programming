@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6122498284532947761}
   - component: {fileID: 7596669614217603155}
-  - component: {fileID: 9081523930900436567}
+  - component: {fileID: 5229604822359319292}
   - component: {fileID: 1206603457052374892}
   m_Layer: 0
   m_Name: PlayerSelector
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
---- !u!114 &9081523930900436567
+--- !u!114 &5229604822359319292
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,18 +65,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 620507704
+  GlobalObjectIdHash: 2136728574
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 0
+  SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 0
+  SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 0
+  SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
 --- !u!114 &1206603457052374892
 MonoBehaviour:
