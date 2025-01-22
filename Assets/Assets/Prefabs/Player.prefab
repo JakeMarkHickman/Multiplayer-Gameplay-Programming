@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 8425038199869537795}
   - component: {fileID: 4907345431708681031}
   - component: {fileID: 9119027647490903896}
-  - component: {fileID: 4458733641086292727}
   - component: {fileID: 7435698838018324393}
   - component: {fileID: 355574143490805118}
+  - component: {fileID: 5998299099513132503}
+  - component: {fileID: 2874569509107522762}
+  - component: {fileID: -3372620562135203223}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -181,20 +183,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &4458733641086292727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3360313392915184426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 937664e980ddb674cb95a57f8b373007, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
+  m_Constraints: 4
 --- !u!114 &7435698838018324393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,3 +237,48 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
+--- !u!114 &5998299099513132503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360313392915184426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc881431659a564fb9bcc138812053c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveScript: {fileID: 2874569509107522762}
+--- !u!114 &2874569509107522762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360313392915184426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6368543a66541446953c92b33cd0cec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  m_CanMove: 1
+  m_MoveSpeed: 1
+  m_Acceleration: 0.1
+  m_RB: {fileID: 9119027647490903896}
+--- !u!114 &-3372620562135203223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360313392915184426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae04149b5b066a4083d0731fea16b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  m_Health:
+    m_InternalValue: 100

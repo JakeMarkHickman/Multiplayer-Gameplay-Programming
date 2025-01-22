@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:GroupBox>
+        <ui:Button text="Host&#10;" name="BTN_Host" />
+        <ui:Button text="Join" name="BTN_Join" />
+        <ui:Button text="Back" name="BTN_Back" />
+    </ui:GroupBox>
+</ui:UXML>

@@ -34,7 +34,6 @@ public class PlayerManager : NetworkBehaviour
             m_PlayerCount.OnValueChanged += (int previousValue, int newValue) =>
             {
                 Debug.Log($"The current amount of players connected is {m_PlayerCount.Value}");
-                m_PlayerCouterDisplay.text = $"Current player count is {m_PlayerCount.Value}";
             };
         }
         else if (IsClient)

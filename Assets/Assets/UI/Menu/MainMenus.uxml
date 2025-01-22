@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:GroupBox>
+        <ui:Button text="Play" name="BTN_Play" />
+        <ui:Button text="Exit" name="BTN_Exit" />
+    </ui:GroupBox>
+</ui:UXML>
