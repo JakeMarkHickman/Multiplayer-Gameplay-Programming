@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Assets/UI/StyleSheet/DefaultStyles.uss?fileID=7433441132597879392&amp;guid=209694f66704cbb4480ed7586caad9ee&amp;type=3#DefaultStyles" />
+    <Style src="project://database/Assets/Assets/UI/StyleSheet/CharacterSelectStyle.uss?fileID=7433441132597879392&amp;guid=9455c35b621a8f040bb084948f5f9c5f&amp;type=3#CharacterSelectStyle" />
+    <ui:GroupBox class="groupbox-center-screen">
+        <ui:Button text="Host" name="BTN_Host" class="button-hover button" />
+        <ui:Button text="Join" name="BTN_Join" class="button-hover button" />
+        <ui:Button text="Exit" name="BTN_Exit" class="button button-hover" />
+    </ui:GroupBox>
+</ui:UXML>
