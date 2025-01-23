@@ -280,5 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  m_MaxHealth:
+    m_InternalValue: 100
   m_Health:
     m_InternalValue: 100

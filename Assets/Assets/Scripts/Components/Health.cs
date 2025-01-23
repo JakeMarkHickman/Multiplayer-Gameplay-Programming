@@ -30,6 +30,27 @@ public class Health : NetworkBehaviour
 
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == gameObject.tag) // Dont Fire Damage Event
+            return;
+
+        GameObject Damager = collision.gameObject;
+        Damage damageComp = Damager.GetComponent<Damage>();
+        float dmg = damageComp.GetDamage();
+
+        Armour defenceComp = gameObject.GetComponent<Armour>();
+
+
+
+        if (IsServer)
+        {
+            
+        }
+
+        healthChanged.Invoke(new HealthChangeEvent {  });
+    }
+
     public void TakeDamage(float damage, GameObject dealer)
     {
 
