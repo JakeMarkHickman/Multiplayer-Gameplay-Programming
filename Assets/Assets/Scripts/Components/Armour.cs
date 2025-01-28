@@ -16,11 +16,9 @@ public class Armour : NetworkBehaviour
         return m_Armour.Value;
     }
 
-    public void SetArmour(float value)
+    [Rpc(SendTo.Server)]
+    public void SetArmourRPC(float value)
     {
-        if (!IsServer)
-            return;
-
         m_Armour.Value = value;
     }
 }

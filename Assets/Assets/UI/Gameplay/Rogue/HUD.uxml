@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="HealthBar" src="project://database/Assets/Assets/UI/Gameplay/Rogue/HealthBar.uxml?fileID=9197481963319205126&amp;guid=bac0806c7fccf194ca7863d9a11cf805&amp;type=3" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:Instance template="HealthBar" name="Bar_Health" />
+    </ui:VisualElement>
+</ui:UXML>

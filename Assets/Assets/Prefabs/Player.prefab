@@ -18,6 +18,9 @@ GameObject:
   - component: {fileID: 5998299099513132503}
   - component: {fileID: 2874569509107522762}
   - component: {fileID: -3372620562135203223}
+  - component: {fileID: -1760059854523690983}
+  - component: {fileID: 5743112299376955099}
+  - component: {fileID: 708559021172713889}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -52,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2444749167
+  GlobalObjectIdHash: 396857337
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -264,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   m_CanMove: 1
-  m_MoveSpeed: 1
+  m_MoveSpeed: 5
   m_Acceleration: 0.1
   m_RB: {fileID: 9119027647490903896}
 --- !u!114 &-3372620562135203223
@@ -284,3 +287,50 @@ MonoBehaviour:
     m_InternalValue: 100
   m_Health:
     m_InternalValue: 100
+--- !u!114 &-1760059854523690983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360313392915184426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3aa2a61e9c3b6498c8ac5a9964de98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  m_Armour:
+    m_InternalValue: 1
+--- !u!114 &5743112299376955099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360313392915184426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32572fd17f4037a4da52ef4d65f641fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Hud: {fileID: 0}
+--- !u!114 &708559021172713889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360313392915184426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 44e958d4ee21eda47ba822a2ac3ff25f, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 216f6dd12f707f34b8248a230bfdf00e, type: 3}
+  m_SortingOrder: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080

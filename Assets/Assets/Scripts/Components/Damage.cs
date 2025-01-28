@@ -32,7 +32,8 @@ public class Damage : NetworkBehaviour
         return damageDelt;
     }
 
-    public void SetMinDamage(float value)
+    [Rpc(SendTo.Server)]
+    public void SetMinDamageRPC(float value)
     {
         if (!IsServer)
             return;
@@ -40,7 +41,8 @@ public class Damage : NetworkBehaviour
         m_MinDamage.Value = value;
     }
 
-    public void SetMaxDamage(float value)
+    [Rpc(SendTo.Server)]
+    public void SetMaxDamageRPC(float value)
     {
         if (!IsServer)
             return;
@@ -48,7 +50,8 @@ public class Damage : NetworkBehaviour
         m_MaxDamage.Value = value;
     }
 
-    public void SetDamageMultiplier(float value)
+    [Rpc(SendTo.Server)]
+    public void SetDamageMultiplierRPC(float value)
     {
         if (!IsServer)
             return;

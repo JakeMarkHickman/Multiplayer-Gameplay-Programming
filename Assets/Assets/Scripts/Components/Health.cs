@@ -2,6 +2,20 @@ using System;
 using Unity.Netcode;
 using UnityEngine;
 
+public struct HealthChangeStruct
+{
+    public HealthChangeStruct(float damage, float changeInHealth, string dealer)
+    {
+        Damage = damage;
+        ChangeInHealth = changeInHealth;
+        DamageDealer = dealer;
+    }
+
+    float Damage;
+    float ChangeInHealth;
+    string DamageDealer;
+}
+
 public class Health : NetworkBehaviour
 {
     [SerializeField] private NetworkVariable<float> m_MaxHealth = new NetworkVariable<float>(
@@ -16,43 +30,35 @@ public class Health : NetworkBehaviour
             NetworkVariableWritePermission.Server
         );
 
-    private struct HealthChangeEvent
+    public event Action<HealthChangeStruct> healthChanged;
+
+    #region Server
+    [Rpc(SendTo.Server)]
+    public void TakeDamageRPC(float damage, string dealer)
     {
-        float damage;
-        float changeInHealth;
-        GameObject DamageDealer;
+        Armour armour = gameObject.GetComponent<Armour>();
+
+        float armourStat = 0;
+
+        if (armour)
+            armourStat = armour.GetArmour();
+
+        float changeInHealth = damage/armourStat;
+
+        m_Health.Value -= changeInHealth;
+
+        TakeDamageClientRPC(damage, changeInHealth, dealer);
     }
 
-    event Action<HealthChangeEvent> healthChanged;
+    #endregion
 
-    public override void OnNetworkSpawn()
+    #region Client
+    [Rpc(SendTo.ClientsAndHost)]
+    private void TakeDamageClientRPC(float damage, float changeInHealth, string dealer)
     {
-
+        healthChanged?.Invoke(new HealthChangeStruct(damage, changeInHealth, dealer));
+        Debug.Log(gameObject.name + " has been damaged by " + dealer + " for " + damage);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == gameObject.tag) // Dont Fire Damage Event
-            return;
-
-        GameObject Damager = collision.gameObject;
-        Damage damageComp = Damager.GetComponent<Damage>();
-        float dmg = damageComp.GetDamage();
-
-        Armour defenceComp = gameObject.GetComponent<Armour>();
-
-
-
-        if (IsServer)
-        {
-            
-        }
-
-        healthChanged.Invoke(new HealthChangeEvent {  });
-    }
-
-    public void TakeDamage(float damage, GameObject dealer)
-    {
-
-    }
+    #endregion
 }
