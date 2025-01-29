@@ -1,6 +1,13 @@
 using Unity.Netcode;
 using UnityEngine;
 
+public enum DamageTypeEnum
+{
+    Bludgeoning, //Normal attcks no special effects
+    Magic, // Can peierce armour
+    Slash // Causes bleed damage
+}
+
 public class Damage : NetworkBehaviour
 {
     [SerializeField]
@@ -22,6 +29,13 @@ public class Damage : NetworkBehaviour
             NetworkVariableWritePermission.Server
         );
 
+    [SerializeField]
+    private NetworkVariable<DamageTypeEnum> m_DamageType = new NetworkVariable<DamageTypeEnum>(
+        0,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+       );
+
     public float GetDamage()
     {
         float damageDelt;
@@ -30,6 +44,11 @@ public class Damage : NetworkBehaviour
         damageDelt *= m_DamageMultiplier.Value;
 
         return damageDelt;
+    }
+
+    public DamageTypeEnum GetDamageType()
+    {
+        return m_DamageType.Value;
     }
 
     [Rpc(SendTo.Server)]

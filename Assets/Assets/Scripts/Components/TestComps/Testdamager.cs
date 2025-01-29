@@ -14,6 +14,6 @@ public class Testdamager : NetworkBehaviour
         if (!health || !damage)
             return;
 
-        health.TakeDamageRPC(damage.GetDamage(), gameObject.name);
+        health.TakeDamageRPC(damage.GetDamageType(), damage.GetDamage(), gameObject.name);
     }
 }
