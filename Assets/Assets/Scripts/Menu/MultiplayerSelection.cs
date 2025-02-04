@@ -26,12 +26,14 @@ public class MultiplayerSelection : MonoBehaviour
     {
         selection.gameObject.SetActive(false);
         NetworkManager.Singleton.StartHost();
+        NetworkManager.Singleton.SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 
     void handleJoinButton(ClickEvent data)
     {
         selection.gameObject.SetActive(false);
         NetworkManager.Singleton.StartClient();
+        NetworkManager.Singleton.SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 
     void handleBackButton(ClickEvent data)
