@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Hierarchy;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -72,6 +73,8 @@ public class WaveSpawner : NetworkBehaviour
                 default
             );
 
+            netObj.OnDeferredDespawnComplete += ObjectDestroyed;
+
             yield return new WaitForSecondsRealtime(Waves[m_CurrentWave].SpawnCooldown);
         }
 
@@ -84,6 +87,11 @@ public class WaveSpawner : NetworkBehaviour
 
         yield return new WaitForSecondsRealtime(WaveCooldown);
 
-        yield return null;
+        StartWave();
+    }
+
+    private void ObjectDestroyed(float tick)
+    {
+       
     }
 }
