@@ -469,11 +469,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6072172359530532268, guid: 2e752bbf061c1b149a5cfe2e8df847a6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.490238
+      value: -9.46
       objectReference: {fileID: 0}
     - target: {fileID: 6072172359530532268, guid: 2e752bbf061c1b149a5cfe2e8df847a6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.4894719
+      value: -0.42
       objectReference: {fileID: 0}
     - target: {fileID: 6072172359530532268, guid: 2e752bbf061c1b149a5cfe2e8df847a6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -696,7 +696,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1888356044}
-    PlayerPrefab: {fileID: 7549221932334028827, guid: 08d91d62d09a45646be74cdd9156cc8f, type: 3}
+    PlayerPrefab: {fileID: 3360313392915184426, guid: 573f7579576777a479d12d9634ecf422, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: b8b2f0e4c20c13a4bb6de1597491a141, type: 2}
