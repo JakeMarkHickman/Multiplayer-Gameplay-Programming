@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Unity.Netcode;
 using UnityEditor.Experimental.Rendering;
 using UnityEngine;
@@ -31,6 +32,16 @@ public struct MaxHealthChangeStruct
     string DamageDealer;
 }
 
+public struct DeathStruct
+{
+    public DeathStruct(string dealer)
+    {
+        DamageDealer = dealer;
+    }
+
+    string DamageDealer;
+}
+
 public class Health : NetworkBehaviour
 {
     [SerializeField] private NetworkVariable<float> m_MaxHealth = new NetworkVariable<float>(
@@ -45,8 +56,9 @@ public class Health : NetworkBehaviour
             NetworkVariableWritePermission.Server
         );
 
-    public event Action<HealthChangeStruct> healthChanged;
-    public event Action<MaxHealthChangeStruct> maxHealthChanged;
+    public event Action<HealthChangeStruct> onHealthChanged;
+    public event Action<MaxHealthChangeStruct> onMaxHealthChanged;
+    public event Action<DeathStruct> onDeath;
 
     #region Server
     [Rpc(SendTo.Server)]
@@ -64,28 +76,43 @@ public class Health : NetworkBehaviour
 
         float armourStat = 0;
 
-        if (armourComp || damageType != DamageTypeEnum.Magic) // Magic is able to go through armour
+        if (armourComp && damageType != DamageTypeEnum.Magic) // Magic is able to go through armour
             armourStat = armourComp.GetArmour();
-
+            
         float changeInHealth = damage/armourStat;
 
-        SetHealthRPC(GetHealth() - changeInHealth, dealer);
+        float health = GetHealth() - changeInHealth;
+
+        if(health<=0)
+        {
+            DeathRPC(dealer);
+            gameObject.GetComponent<NetworkObject>().Despawn(true);
+        }
+
+        SetHealthRPC(health, dealer);
     }
     #endregion
 
     #region Client
     [Rpc(SendTo.ClientsAndHost)]
+
     private void HealthChangedClientRPC(float damage, float changeInHealth, string dealer)
     {
-        healthChanged?.Invoke(new HealthChangeStruct(damage, changeInHealth, dealer));
+        onHealthChanged?.Invoke(new HealthChangeStruct(damage, changeInHealth, dealer));
         Debug.Log(gameObject.name + " has been damaged by " + dealer + " for " + damage);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
     private void MaxHealthChangedClientRPC(float damage, float changeInHealth, string dealer)
     {
-        maxHealthChanged?.Invoke(new MaxHealthChangeStruct(damage, changeInHealth, dealer));
+        onMaxHealthChanged?.Invoke(new MaxHealthChangeStruct(damage, changeInHealth, dealer));
         Debug.Log(gameObject.name + " has had max health damaged by " + dealer + " for " + damage);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void DeathRPC(string dealer)
+    {
+        onDeath?.Invoke(new DeathStruct(dealer));
     }
     #endregion
 

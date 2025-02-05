@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Hierarchy;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -50,16 +51,20 @@ public class WaveSpawner : NetworkBehaviour
 
     private IEnumerator c_ObjectCooldown()
     {
-        for (int i = 0; i < Waves[m_CurrentWave].ObjectAmount; i++)
+        int waveToSpawn = m_CurrentWave % m_MaxWave;
+
+        m_ObjectsLeft = Waves[waveToSpawn].ObjectAmount;
+
+        for (int i = 0; i < Waves[waveToSpawn].ObjectAmount; i++)
         {
-            int random = Random.Range(0, Waves[m_CurrentWave].ObjectsToSpawn.Length);
+            int random = Random.Range(0, Waves[waveToSpawn].ObjectsToSpawn.Length);
 
             float SpawnX = Random.Range(MinX, MaxX);
             float SpawnY = Random.Range(MinY, MaxY);
 
             NetworkObject netObj = NetworkManager.SpawnManager.InstantiateAndSpawn
             (
-                Waves[m_CurrentWave].ObjectsToSpawn[random],
+                Waves[waveToSpawn].ObjectsToSpawn[random],
                 0, 
                 false, 
                 false, 
@@ -73,9 +78,18 @@ public class WaveSpawner : NetworkBehaviour
                 default
             );
 
-            netObj.OnDeferredDespawnComplete += ObjectDestroyed;
+            Health healthcomp = netObj.GetComponent<Health>();
 
-            yield return new WaitForSecondsRealtime(Waves[m_CurrentWave].SpawnCooldown);
+            if(healthcomp)
+            {
+                healthcomp.onDeath += ObjectDestroyed;
+            }
+            else
+            {
+                ObjectDestroyed(new DeathStruct("none"));
+            }
+
+            yield return new WaitForSecondsRealtime(Waves[waveToSpawn].SpawnCooldown);
         }
 
         yield return null;
@@ -90,8 +104,16 @@ public class WaveSpawner : NetworkBehaviour
         StartWave();
     }
 
-    private void ObjectDestroyed(float tick)
+    private void ObjectDestroyed(DeathStruct data)
     {
-       
+        m_ObjectsLeft--;
+
+        Debug.Log("Objects Left = " + m_ObjectsLeft);
+
+        if(m_ObjectsLeft <= 0)
+        {
+            Debug.Log("All Objects Destroyed");
+            c_WaveCooldown = StartCoroutine(c_WaveFinished());
+        }
     }
 }

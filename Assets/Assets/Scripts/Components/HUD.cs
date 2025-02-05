@@ -11,12 +11,12 @@ public class HUD : MonoBehaviour
     {
         m_HealthComp = gameObject.GetComponent<Health>();
 
-        m_HealthComp.healthChanged += OnHealthChanged;
+        m_HealthComp.onHealthChanged += OnHealthChanged;
     }
 
     private void OnDisable()
     {
-        m_HealthComp.healthChanged -= OnHealthChanged;
+        m_HealthComp.onHealthChanged -= OnHealthChanged;
     }
 
     private void OnHealthChanged(HealthChangeStruct data)
