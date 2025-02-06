@@ -1,15 +1,21 @@
 using System.Collections;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement : NetworkBehaviour
 {
     [SerializeField] bool m_CanMove = true;
-    [SerializeField] float m_MoveSpeed = 10.0f;
-    [SerializeField] float m_Acceleration = 0.1f;
     [SerializeField] Rigidbody2D m_RB;
+
+    public NetworkVariable<Vector2> m_LastDirection = new NetworkVariable<Vector2>(
+            new Vector2(0, 0),
+            NetworkVariableReadPermission.Everyone,
+            NetworkVariableWritePermission.Owner
+        );
 
     private Coroutine c_move;
     private Vector2 m_Direction;
@@ -25,6 +31,9 @@ public class Movement : NetworkBehaviour
             return;
 
         m_Direction = context.ReadValue<Vector2>();
+
+        m_LastDirection.Value = m_Direction;
+
         m_moving = true;
 
         c_move = StartCoroutine(c_MovementUpdate());
@@ -44,9 +53,21 @@ public class Movement : NetworkBehaviour
 
     IEnumerator c_MovementUpdate()
     {
+        Speed speedComp = gameObject.GetComponent<Speed>();
+        float speed = 10f;
+        float acceleration = 0.1f;
+
+        if (speedComp)
+        {
+            speed = speedComp.GetSpeed();
+            acceleration = speedComp.GetAcceleration();
+        }
+
         while (m_moving)
         {
-            m_currentSpeed = Mathf.Lerp(m_currentSpeed, m_MoveSpeed, m_Acceleration);
+            
+
+            m_currentSpeed = Mathf.Lerp(m_currentSpeed, speed, acceleration);
             m_RB.linearVelocity = new Vector2(m_Direction.x * m_currentSpeed, m_Direction.y * m_currentSpeed);
             yield return new WaitForFixedUpdate();
         }

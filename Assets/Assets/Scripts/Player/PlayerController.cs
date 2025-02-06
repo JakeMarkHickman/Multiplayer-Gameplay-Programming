@@ -7,9 +7,6 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] MainHand handScript;
     InputSystem_Actions m_PlayerActions;
 
-    [SerializeField] Camera m_Camera;
-    [SerializeField] AudioListener m_AudioListener;
-
     private void OnEnable()
     {
         m_PlayerActions = new InputSystem_Actions();
@@ -19,14 +16,7 @@ public class PlayerController : NetworkBehaviour
         m_PlayerActions.Player.Move.performed += moveScript.Handle_MovePerformed;
         m_PlayerActions.Player.Move.canceled += moveScript.Handle_MoveCancelled;
         m_PlayerActions.Player.Attack.performed += handScript.Handle_OnAttack;
-
-        if (!IsOwner)
-            return;
-
-        m_Camera.enabled = true;
-        m_AudioListener.enabled = true;
     }
-
 
     private void OnDisable()
     {
