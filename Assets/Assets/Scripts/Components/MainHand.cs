@@ -22,6 +22,6 @@ public class MainHand : NetworkBehaviour
         if (!item)
             return;
 
-        item.Use();
+        item.Use(gameObject.GetComponent<NetworkObject>());
     }
 }

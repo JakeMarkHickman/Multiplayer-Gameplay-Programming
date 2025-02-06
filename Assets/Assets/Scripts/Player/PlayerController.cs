@@ -1,10 +1,14 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     [SerializeField] Movement moveScript;
     [SerializeField] MainHand handScript;
     InputSystem_Actions m_PlayerActions;
+
+    [SerializeField] Camera m_Camera;
+    [SerializeField] AudioListener m_AudioListener;
 
     private void OnEnable()
     {
@@ -15,7 +19,14 @@ public class PlayerController : MonoBehaviour
         m_PlayerActions.Player.Move.performed += moveScript.Handle_MovePerformed;
         m_PlayerActions.Player.Move.canceled += moveScript.Handle_MoveCancelled;
         m_PlayerActions.Player.Attack.performed += handScript.Handle_OnAttack;
+
+        if (!IsOwner)
+            return;
+
+        m_Camera.enabled = true;
+        m_AudioListener.enabled = true;
     }
+
 
     private void OnDisable()
     {
