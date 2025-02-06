@@ -27,4 +27,15 @@ public class Speed : NetworkBehaviour
     {
         return m_Acceleration.Value;
     }
+
+    [Rpc(SendTo.Server)]
+    public void SetSpeed(float value)
+    {
+        m_Speed.Value = value; 
+    }
+
+    public void SetAcceleration(float value)
+    {
+        m_Acceleration.Value = value;
+    }
 }
