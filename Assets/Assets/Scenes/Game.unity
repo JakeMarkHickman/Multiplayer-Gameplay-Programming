@@ -193,7 +193,7 @@ PrefabInstance:
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: 'Waves.Array.data[0].ObjectsToSpawn.Array.data[0]'
       value: 
-      objectReference: {fileID: 9179153771257976257, guid: e3a94eaf3ff4fa0408de85349acbee4f, type: 3}
+      objectReference: {fileID: 6099158850244456016, guid: ad1a3e88115174b4e94caefb01fd2416, type: 3}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: 'Waves.Array.data[0].ObjectsToSpawn.Array.data[1]'
       value: 

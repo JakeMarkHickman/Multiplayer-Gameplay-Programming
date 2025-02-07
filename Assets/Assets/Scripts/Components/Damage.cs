@@ -36,6 +36,20 @@ public class Damage : NetworkBehaviour
         NetworkVariableWritePermission.Server
        );
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+       NetworkObject obj = collision.gameObject.GetComponent<NetworkObject>();
+        
+       Health healthComp = obj.GetComponent<Health>();
+
+        Debug.Log(healthComp.ToString());
+
+        if (!healthComp)
+            return;
+
+        healthComp.TakeDamageRPC(GetDamageType(), GetDamage(), obj.name);
+    }
+
     public float GetDamage()
     {
         float damageDelt;
