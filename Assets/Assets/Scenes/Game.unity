@@ -136,19 +136,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: MaxX
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: MaxY
-      value: 5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: MinX
-      value: -10
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: MinY
-      value: -5
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: MixX
@@ -389,7 +389,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

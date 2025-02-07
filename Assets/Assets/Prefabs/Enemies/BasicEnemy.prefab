@@ -11,10 +11,13 @@ GameObject:
   - component: {fileID: 2997381054463420333}
   - component: {fileID: 1494438800177805904}
   - component: {fileID: 6099158850244456016}
+  - component: {fileID: 837788304277045090}
+  - component: {fileID: 804036561373400032}
   - component: {fileID: 9034276970264197202}
   - component: {fileID: 2110509316368048856}
   - component: {fileID: 8126897432256745089}
   - component: {fileID: 8982763559882112433}
+  - component: {fileID: 8820633663878914335}
   - component: {fileID: 5891463422753983860}
   - component: {fileID: 3989067052643312772}
   - component: {fileID: 4439711688543608103}
@@ -121,6 +124,59 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &837788304277045090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3293917951467302500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkTransformExpanded: 0
+  AuthorityMode: 0
+  TickSyncChildren: 0
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  SwitchTransformSpaceWhenParented: 0
+  Interpolate: 1
+  SlerpPosition: 0
+--- !u!114 &804036561373400032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3293917951467302500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkRigidbodyBaseExpanded: 0
+  UseRigidBodyForMotion: 0
+  AutoUpdateKinematicState: 1
+  AutoSetKinematicOnDespawn: 1
 --- !u!50 &9034276970264197202
 Rigidbody2D:
   serializedVersion: 5
@@ -147,7 +203,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &2110509316368048856
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -209,6 +265,9 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   moveScript: {fileID: 8982763559882112433}
   hand: {fileID: 5891463422753983860}
+  TargetTag: Player
+  SearchDistance: 10
+  Target: {fileID: 0}
 --- !u!114 &8982763559882112433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +285,23 @@ MonoBehaviour:
   m_RB: {fileID: 9034276970264197202}
   m_LastDirection:
     m_InternalValue: {x: 0, y: 0}
+--- !u!114 &8820633663878914335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3293917951467302500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b3cd2470f252614caddff7fc81ce734, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  m_Speed:
+    m_InternalValue: 2
+  m_Acceleration:
+    m_InternalValue: 0.1
 --- !u!114 &5891463422753983860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   m_Resistance:
-    m_InternalValue: 0
+    m_InternalValue: 2
 --- !u!114 &7291453122918238421
 MonoBehaviour:
   m_ObjectHideFlags: 0

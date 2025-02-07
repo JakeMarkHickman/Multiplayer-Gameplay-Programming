@@ -42,12 +42,10 @@ public class Damage : NetworkBehaviour
         
        Health healthComp = obj.GetComponent<Health>();
 
-        Debug.Log(healthComp.ToString());
+       if (!healthComp)
+           return;
 
-        if (!healthComp)
-            return;
-
-        healthComp.TakeDamageRPC(GetDamageType(), GetDamage(), obj.name);
+       healthComp.TakeDamageRPC(GetDamageType(), GetDamage(), obj.name);
     }
 
     public float GetDamage()

@@ -30,13 +30,7 @@ public class Movement : NetworkBehaviour
         if (!m_CanMove)
             return;
 
-        m_Direction = context.ReadValue<Vector2>();
-
-        m_LastDirection.Value = m_Direction;
-
-        m_moving = true;
-
-        c_move = StartCoroutine(c_MovementUpdate());
+        Move(context.ReadValue<Vector2>());
     }
 
     public void Handle_MoveCancelled(InputAction.CallbackContext context)
@@ -44,11 +38,26 @@ public class Movement : NetworkBehaviour
         if (!IsOwner)
             return;
 
-        m_Direction = context.ReadValue<Vector2>();
-        m_moving = false;
+        Move(context.ReadValue<Vector2>());
+        
+    }
 
-        StopCoroutine(c_move);
-        m_RB.linearVelocity = new Vector2(0.0f, 0.0f);
+    public void Move(Vector2 Direction)
+    {
+        m_Direction = Direction;
+
+        if(m_Direction != new Vector2(0.0f, 0.0f))
+        {
+            m_moving = true;
+            m_LastDirection.Value = m_Direction;
+            c_move = StartCoroutine(c_MovementUpdate());
+        }
+        else
+        {
+            m_moving = false;
+            StopCoroutine(c_move);
+            m_RB.linearVelocity = new Vector2(0.0f, 0.0f);
+        }
     }
 
     IEnumerator c_MovementUpdate()
@@ -65,8 +74,6 @@ public class Movement : NetworkBehaviour
 
         while (m_moving)
         {
-            
-
             m_currentSpeed = Mathf.Lerp(m_currentSpeed, speed, acceleration);
             m_RB.linearVelocity = new Vector2(m_Direction.x * m_currentSpeed, m_Direction.y * m_currentSpeed);
             yield return new WaitForFixedUpdate();
