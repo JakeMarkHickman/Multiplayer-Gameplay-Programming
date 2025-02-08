@@ -38,14 +38,17 @@ public class Damage : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       NetworkObject obj = collision.gameObject.GetComponent<NetworkObject>();
-        
-       Health healthComp = obj.GetComponent<Health>();
+        NetworkObject obj = collision.gameObject.GetComponent<NetworkObject>();
 
-       if (!healthComp)
-           return;
+        if (!obj)
+            return;
 
-       healthComp.TakeDamageRPC(GetDamageType(), GetDamage(), obj.name);
+        Health healthComp = obj.GetComponent<Health>();
+
+        if (!healthComp)
+            return;
+
+        healthComp.TakeDamageRPC(GetDamageType(), GetDamage(), obj.name);
     }
 
     public float GetDamage()
