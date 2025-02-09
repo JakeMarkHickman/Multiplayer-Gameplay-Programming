@@ -250,7 +250,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3360313392915184426}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
@@ -269,12 +269,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3360313392915184426}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32572fd17f4037a4da52ef4d65f641fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   m_Hud: {fileID: 708559021172713889}
+  _spawner: {fileID: 0}
+  m_Wave:
+    m_InternalValue: 0
+  m_Round:
+    m_InternalValue: 0
 --- !u!114 &5998299099513132503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,9 +344,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   m_MaxHealth:
-    m_InternalValue: 100
+    m_InternalValue: 25
   m_Health:
-    m_InternalValue: 100
+    m_InternalValue: 25
+  m_DamageAudio:
+  - {fileID: 8300000, guid: a010ced82898d4f4488c3f8fa56d8fa8, type: 3}
+  - {fileID: 8300000, guid: c8e9433fa3d3fa648a4b14ce0a373d71, type: 3}
+  - {fileID: 8300000, guid: 0051f2ed028990142a60373467c7971d, type: 3}
+  - {fileID: 8300000, guid: 4b6007a8467f43b4b828006d2dd7e617, type: 3}
+  - {fileID: 8300000, guid: 14d3346d73a70a4439cae0be47361995, type: 3}
+  - {fileID: 8300000, guid: 029623d4271736c478b2cd36c872dd0c, type: 3}
+  - {fileID: 8300000, guid: 8bdb1c249b988af4888d4ae940a2d7c2, type: 3}
+  m_DeathAudio:
+  - {fileID: 8300000, guid: 1b4cbcbf5f2326748bd6b4298592b96f, type: 3}
+  - {fileID: 8300000, guid: 322cce6f2ef80ec4899b6dd383229ad9, type: 3}
+  - {fileID: 8300000, guid: b34ed5d035e768642b3e5f5f63ffd702, type: 3}
+  - {fileID: 8300000, guid: e8e168a18d87b214193b4edd5c695114, type: 3}
+  - {fileID: 8300000, guid: 4c03750e6c875d847a50f404246952b1, type: 3}
+  - {fileID: 8300000, guid: 4d957e3fe0844b8468c8443d81d86208, type: 3}
+  - {fileID: 8300000, guid: e75c2bfe5ded2974c9aaa127f0635e8f, type: 3}
 --- !u!114 &-1760059854523690983
 MonoBehaviour:
   m_ObjectHideFlags: 0

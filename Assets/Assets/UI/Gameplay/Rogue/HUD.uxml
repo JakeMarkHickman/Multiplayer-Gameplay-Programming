@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:Template name="HealthBar" src="project://database/Assets/Assets/UI/Gameplay/Rogue/HealthBar.uxml?fileID=9197481963319205126&amp;guid=bac0806c7fccf194ca7863d9a11cf805&amp;type=3" />
+    <ui:Template name="HealthBar" src="project://database/Assets/Assets/UI/Gameplay/Rogue/HealthBar.uxml?fileID=9197481963319205126&amp;guid=bac0806c7fccf194ca7863d9a11cf805&amp;type=3#HealthBar" />
     <ui:VisualElement style="flex-grow: 1;">
         <ui:Instance template="HealthBar" name="Bar_Health" />
     </ui:VisualElement>
+    <ui:Label text="Round: 0     Wave: 0" name="RoundWave_Lable" style="background-color: rgba(113, 113, 113, 0.57); color: rgb(229, 229, 229);" />
 </ui:UXML>

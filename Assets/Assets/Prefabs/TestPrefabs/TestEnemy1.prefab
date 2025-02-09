@@ -192,3 +192,7 @@ MonoBehaviour:
     m_InternalValue: 1
   m_Health:
     m_InternalValue: 1
+  m_DamageAudio:
+  - {fileID: 0}
+  m_DeathAudio:
+  - {fileID: 0}

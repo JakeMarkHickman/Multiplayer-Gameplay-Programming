@@ -38,6 +38,9 @@ public class Damage : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!IsServer)
+            return;
+        
         NetworkObject obj = collision.gameObject.GetComponent<NetworkObject>();
 
         if (!obj)
@@ -48,9 +51,19 @@ public class Damage : NetworkBehaviour
         if (!healthComp)
             return;
 
-        healthComp.TakeDamageRPC(GetDamageType(), GetDamage(), obj.name);
+        healthComp.TakeDamageRPC(GetDamageType(), GetDamage(), gameObject.tag);
     }
 
+    public float GetMinDamage()
+    {
+        return m_MinDamage.Value;
+    }
+    
+    public float GetMaxDamage()
+    {
+        return m_MaxDamage.Value;
+    }
+    
     public float GetDamage()
     {
         float damageDelt;

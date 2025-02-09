@@ -11,14 +11,11 @@ public class Ranged : Item
             NetworkVariableWritePermission.Owner
         );
 
-
     Vector3 playerPos;
 
     public override void Use(NetworkObject user)
     {
-        base.Use(user);
-
-        if (!IsOwner)
+        if (!IsServer)
             return;
 
         playerPos = user.transform.position;
@@ -26,14 +23,16 @@ public class Ranged : Item
 
         if (FireDir.Value == Vector2.zero)
         {
-            FireDir.Value = new Vector2(0, 0);
+            FireDir.Value = new Vector2(0, 1);
         }
 
-        FireRPC();
+        FireRPC(user.gameObject.tag);
+        
+        base.Use(user);
     }
 
     [Rpc(SendTo.Server)]
-    public void FireRPC()
+    public void FireRPC(string tag)
     {
         Vector3 pos = playerPos + (Vector3)FireDir.Value.normalized;
         Quaternion rot = Quaternion.LookRotation(Vector3.forward, FireDir.Value);
@@ -51,6 +50,8 @@ public class Ranged : Item
                 pos,
                 rot
             );
+
+        Proj.tag = tag;
 
         if(Proj.GetComponent<Rigidbody2D>())
         {

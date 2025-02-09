@@ -10,12 +10,12 @@ public class MainHand : NetworkBehaviour
     {
         if (!IsOwner)
             return;
-
+        
         UseRPC();
     }
 
     [Rpc(SendTo.Server)]
-    public void UseRPC()
+    private void UseRPC()
     {
         var inst = NetworkManager.SpawnManager.InstantiateAndSpawn(m_Item);
         Item item = inst.GetComponent<Item>();

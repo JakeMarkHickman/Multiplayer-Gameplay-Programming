@@ -1,33 +1,34 @@
 using System;
 using Unity.Netcode;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public struct HealthChangeStruct
 {
-    public HealthChangeStruct(float damage, float changeInHealth, string dealer)
+    public HealthChangeStruct(float damage, float changeInHealth, string tag)
     {
         Damage = damage;
         ChangeInHealth = changeInHealth;
-        DamageDealer = dealer;
+        DamageTag = tag;
     }
 
     float Damage;
     float ChangeInHealth;
-    string DamageDealer;
+    string DamageTag;
 }
 
 public struct MaxHealthChangeStruct
 {
-    public MaxHealthChangeStruct(float damage, float changeInHealth, string dealer)
+    public MaxHealthChangeStruct(float damage, float changeInHealth, string tag)
     {
         Damage = damage;
         ChangeInHealth = changeInHealth;
-        DamageDealer = dealer;
+        DamageTag = tag;
     }
 
     float Damage;
     float ChangeInHealth;
-    string DamageDealer;
+    string DamageTag;
 }
 
 public struct DeathStruct
@@ -54,17 +55,23 @@ public class Health : NetworkBehaviour
             NetworkVariableWritePermission.Server
         );
 
+    [SerializeField] private AudioClip[] m_DamageAudio;
+    [SerializeField] private AudioClip[] m_DeathAudio;
+    
     public event Action<HealthChangeStruct> onHealthChanged;
     public event Action<MaxHealthChangeStruct> onMaxHealthChanged;
     public event Action<DeathStruct> onDeath;
 
     #region Server
     [Rpc(SendTo.Server)]
-    public void TakeDamageRPC(DamageTypeEnum damageType, float damage, string dealer)
+    public void TakeDamageRPC(DamageTypeEnum damageType, float damage, string tag)
     {
+        if (gameObject.tag == tag)
+            return;
+        
         Resistance resistanceComp = gameObject.GetComponent<Resistance>();
 
-        if (resistanceComp) // Resistance comp only exists if there is an active resistance
+        if (resistanceComp && resistanceComp.isActiveAndEnabled) // Resistance comp only exists if there is an active resistance
         {
             if (resistanceComp.GetReistance() == damageType)
                 return;
@@ -83,33 +90,44 @@ public class Health : NetworkBehaviour
 
         if(health<=0)
         {
-            DeathRPC(dealer);
+            DeathRPC(tag);
             gameObject.GetComponent<NetworkObject>().Despawn(true);
         }
 
-        SetHealthRPC(health, dealer);
+        SetHealthRPC(health, tag);
     }
     #endregion
 
     #region Client
     [Rpc(SendTo.ClientsAndHost)]
 
-    private void HealthChangedClientRPC(float damage, float changeInHealth, string dealer)
+    private void HealthChangedClientRPC(float damage, float changeInHealth, string tag)
     {
-        onHealthChanged?.Invoke(new HealthChangeStruct(damage, changeInHealth, dealer));
-        Debug.Log(gameObject.name + " has been damaged by " + dealer + " for " + damage);
+        if(gameObject.TryGetComponent<ParticleSystem>(out ParticleSystem ps))
+        {
+            ps.Play();
+        }
+        
+        int randomSound = Random.Range(0, m_DamageAudio.Length);
+        AudioManager.Instance.PlayAudio(m_DamageAudio[randomSound], false);
+        onHealthChanged?.Invoke(new HealthChangeStruct(damage, changeInHealth, tag));
+        Debug.Log(gameObject.name + " has been damaged by " + tag + " for " + damage);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    private void MaxHealthChangedClientRPC(float damage, float changeInHealth, string dealer)
+    private void MaxHealthChangedClientRPC(float damage, float changeInHealth, string tag)
     {
-        onMaxHealthChanged?.Invoke(new MaxHealthChangeStruct(damage, changeInHealth, dealer));
-        Debug.Log(gameObject.name + " has had max health damaged by " + dealer + " for " + damage);
+        onMaxHealthChanged?.Invoke(new MaxHealthChangeStruct(damage, changeInHealth, tag));
+        Debug.Log(gameObject.name + " has had max health damaged by " + tag + " for " + damage);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    public void DeathRPC(string dealer)
+    private void DeathRPC(string dealer)
     {
+        
+        
+        int randomSound = Random.Range(0, m_DeathAudio.Length);
+        AudioManager.Instance.PlayAudio(m_DeathAudio[randomSound], false);
         onDeath?.Invoke(new DeathStruct(dealer));
     }
     #endregion
@@ -129,25 +147,25 @@ public class Health : NetworkBehaviour
 
     #region Setters
     [Rpc(SendTo.Server)]
-    public void SetMaxHealthRPC(float value, string dealer)
+    public void SetMaxHealthRPC(float value, string tag)
     {
         float preMax = GetMaxHealth();
 
         float healthPercent = GetHealth() / preMax;
 
         m_MaxHealth.Value = value;
-        MaxHealthChangedClientRPC(value, preMax, dealer);
+        MaxHealthChangedClientRPC(value, preMax, tag);
 
-        SetHealthRPC(healthPercent * GetMaxHealth(), dealer);
+        SetHealthRPC(healthPercent * GetMaxHealth(), tag);
     }
 
     [Rpc(SendTo.Server)]
-    public void SetHealthRPC(float value, string dealer)
+    public void SetHealthRPC(float value, string tag)
     {
         float preHealth = GetHealth();
 
         m_Health.Value = value;
-        HealthChangedClientRPC(value, preHealth - value, dealer);
+        HealthChangedClientRPC(value, preHealth - value, tag);
     }
     #endregion
 }

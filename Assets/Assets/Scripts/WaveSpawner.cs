@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using Unity.Hierarchy;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,6 +12,16 @@ struct WaveData
     [SerializeField] public float SpawnCooldown;
 }
 
+public struct WaveCompletedStruct
+{
+    
+}
+
+public struct RoundCompletedStruct
+{
+    
+}
+
 
 public class WaveSpawner : NetworkBehaviour
 {
@@ -22,15 +32,32 @@ public class WaveSpawner : NetworkBehaviour
 
     [SerializeField] WaveData[] Waves;
     [SerializeField] float WaveCooldown;
+    [SerializeField] private float RoundMultiplier;
 
+    [SerializeField] private float waveDifficulty = 1;
+
+    public event Action<WaveCompletedStruct> onWaveCompletedEvent;
+    public event Action<RoundCompletedStruct> onRoundCompletedEvent;
+    
     private bool m_OnCooldown = false;
 
     private int m_ObjectsLeft = 0;
-    private int m_CurrentWave = 0;
     private int m_MaxWave = 0;
 
     private Coroutine c_ObjectSpawn;
     private Coroutine c_WaveCooldown;
+    
+    [SerializeField] public NetworkVariable<int> m_CurrentWave = new NetworkVariable<int>(
+        0,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
+    
+    [SerializeField] public NetworkVariable<int> m_CurrentRound = new NetworkVariable<int>(
+        0,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
 
     private void Start()
     {
@@ -51,16 +78,23 @@ public class WaveSpawner : NetworkBehaviour
 
     private IEnumerator c_ObjectCooldown()
     {
-        int waveToSpawn = m_CurrentWave % m_MaxWave;
+        int waveToSpawn = m_CurrentWave.Value % m_MaxWave;
+
+        if (waveToSpawn == 0)
+        {
+            m_CurrentRound.Value++;
+            waveDifficulty *= RoundMultiplier;
+            onRoundCompletedEvent?.Invoke(new RoundCompletedStruct());
+        }
 
         m_ObjectsLeft = Waves[waveToSpawn].ObjectAmount;
 
         for (int i = 0; i < Waves[waveToSpawn].ObjectAmount; i++)
         {
-            int random = Random.Range(0, Waves[waveToSpawn].ObjectsToSpawn.Length);
+            int random = UnityEngine.Random.Range(0, Waves[waveToSpawn].ObjectsToSpawn.Length);
 
-            float SpawnX = Random.Range(MinX, MaxX);
-            float SpawnY = Random.Range(MinY, MaxY);
+            float SpawnX = UnityEngine.Random.Range(MinX, MaxX);
+            float SpawnY = UnityEngine.Random.Range(MinY, MaxY);
 
             NetworkObject netObj = NetworkManager.SpawnManager.InstantiateAndSpawn
             (
@@ -80,8 +114,15 @@ public class WaveSpawner : NetworkBehaviour
 
             Health healthcomp = netObj.GetComponent<Health>();
 
+            if (netObj.TryGetComponent<Damage>(out Damage dmgComp))
+            {
+                dmgComp.SetMaxDamageRPC(dmgComp.GetMaxDamage() + waveDifficulty);
+                dmgComp.SetMinDamageRPC(dmgComp.GetMinDamage() + waveDifficulty);
+            }
+
             if(healthcomp)
             {
+                healthcomp.SetMaxHealthRPC(healthcomp.GetMaxHealth() + waveDifficulty, gameObject.tag);
                 healthcomp.onDeath += ObjectDestroyed;
             }
             else
@@ -97,7 +138,7 @@ public class WaveSpawner : NetworkBehaviour
 
     private IEnumerator c_WaveFinished()
     {
-        m_CurrentWave++;
+        m_CurrentWave.Value++;
 
         yield return new WaitForSecondsRealtime(WaveCooldown);
 
@@ -108,12 +149,10 @@ public class WaveSpawner : NetworkBehaviour
     {
         m_ObjectsLeft--;
 
-        Debug.Log("Objects Left = " + m_ObjectsLeft);
-
         if(m_ObjectsLeft <= 0)
         {
-            Debug.Log("All Objects Destroyed");
             c_WaveCooldown = StartCoroutine(c_WaveFinished());
+            onWaveCompletedEvent?.Invoke(new WaveCompletedStruct());
         }
     }
 }

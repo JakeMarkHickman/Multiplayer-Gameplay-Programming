@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +9,9 @@ public class MultiplayerSelection : MonoBehaviour
 {
     UIDocument selection;
     [SerializeField] UIDocument menu;
-
+    [SerializeField] private NetworkObject m_PlayerObj;
+    [SerializeField] private LevelManager levelManager;
+    
     private void OnEnable()
     {
         selection = GetComponent<UIDocument>();
@@ -24,8 +28,9 @@ public class MultiplayerSelection : MonoBehaviour
 
     void handleHostButton(ClickEvent data)
     {
-        selection.gameObject.SetActive(false);
         NetworkManager.Singleton.StartHost();
+        NetworkManager.Singleton.SceneManager.OnLoadComplete += levelManager.OnSceneLoaded;
+        
         NetworkManager.Singleton.SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 
@@ -39,5 +44,21 @@ public class MultiplayerSelection : MonoBehaviour
     {
         menu.gameObject.SetActive(true);
         selection.gameObject.SetActive(false);
+    }
+    
+
+    [Rpc(SendTo.Server)]
+    private void SpawnPlayerRPC(ulong PlayerID)
+    {
+        NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn
+        (
+            m_PlayerObj,
+            PlayerID,
+            false,
+            true,
+            false,
+            new Vector3(0, 0, 0),
+            quaternion.identity
+        );
     }
 }

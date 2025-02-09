@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -6,22 +8,60 @@ public class AiController : NetworkBehaviour
 {
     [SerializeField] Movement moveScript;
     [SerializeField] MainHand hand;
+    
     [SerializeField] string TargetTag;
     [SerializeField] float SearchDistance = 20.0f;
+    [SerializeField] private float AttackDistance = 3.0f;
+    [SerializeField] private float AttackCooldown = 5.0f;
 
     [SerializeField] private NetworkObject Target;
+
+    private Damage damageComp;
+    private Coroutine c_Attack;
+    private bool canAttack = true;
+
+    private void OnEnable()
+    {
+        damageComp = gameObject.GetComponent<Damage>();
+    }
+
 
     private void FixedUpdate()
     {
         if (!IsServer)
             return;
 
-
         SetTarget(FindClosestTarget());
+        
+        if (!Target || !(GetDistanceToObject(Target.gameObject) <= AttackDistance))
+        {
+            MoveTowardsTarget();
+        }
 
-        MoveTowardsTarget();
+        if (damageComp && canAttack)
+        {
+            c_Attack = StartCoroutine(AttackTarget());
+        }
     }
 
+    private IEnumerator AttackTarget()
+    {
+        if (Target && GetDistanceToObject(Target.gameObject) <= AttackDistance)
+        {
+            if (Target.TryGetComponent<Health>(out Health healthComp))
+            {
+                canAttack = false;
+                healthComp.TakeDamageRPC(damageComp.GetDamageType(), damageComp.GetDamage(), gameObject.name);
+
+                yield return new WaitForSecondsRealtime(AttackCooldown);
+
+                canAttack = true;
+            }
+        }
+        
+        yield return null;
+    }
+    
     private void MoveTowardsTarget()
     {
         if (!moveScript)
@@ -31,7 +71,6 @@ public class AiController : NetworkBehaviour
             return;
 
         moveScript.Move((Target.transform.position - gameObject.transform.position).normalized);
-    
     }
 
     private void SetTarget(NetworkObject value)
@@ -59,7 +98,7 @@ public class AiController : NetworkBehaviour
             float closestEntDis = Vector3.Distance(closest.gameObject.transform.position, gameObject.transform.position);
 
             float closestDistance = SearchDistance < closestEntDis ? SearchDistance : closestEntDis;
-            float distance = Vector3.Distance(cur.gameObject.transform.position, gameObject.transform.position);
+            float distance = GetDistanceToObject(cur);
 
             if (closestDistance < distance)
                 continue;
@@ -71,5 +110,8 @@ public class AiController : NetworkBehaviour
         return curTarget;
     }
 
-
+    private float GetDistanceToObject(GameObject ObjectToTrack)
+    {
+        return Vector3.Distance(ObjectToTrack.gameObject.transform.position, gameObject.transform.position);
+    }
 }
