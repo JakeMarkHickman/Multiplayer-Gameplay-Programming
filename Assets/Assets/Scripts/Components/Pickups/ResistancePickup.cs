@@ -13,15 +13,24 @@ public class ResistancePickup : NetworkBehaviour
 
         if (collision.gameObject.TryGetComponent<Resistance>(out Resistance resistanceComp))
         {
-            if(RemoveResistances)
+            if(!RemoveResistances)
             {
                 resistanceComp.enabled = true;
                 resistanceComp.SetResistanceRPC(m_Resistance);
+                DestroyPickupRPC();
             }
             else
             {
                 resistanceComp.enabled = false;
+                DestroyPickupRPC();
             }
         }
+    }
+
+    [Rpc(SendTo.Server)]
+
+    private void DestroyPickupRPC()
+    {
+        this.gameObject.GetComponent<NetworkObject>().Despawn(true);
     }
 }

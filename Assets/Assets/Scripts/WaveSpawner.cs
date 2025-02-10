@@ -34,6 +34,8 @@ public class WaveSpawner : NetworkBehaviour
     [SerializeField] float WaveCooldown;
     [SerializeField] private float RoundMultiplier;
 
+    [SerializeField] private bool LoopLastRound;
+
     [SerializeField] private float waveDifficulty = 1;
 
     public event Action<WaveCompletedStruct> onWaveCompletedEvent;
@@ -43,6 +45,9 @@ public class WaveSpawner : NetworkBehaviour
 
     private int m_ObjectsLeft = 0;
     private int m_MaxWave = 0;
+
+    private bool DoneOnce = false;
+    private bool OneRoundComplete = false;
 
     private Coroutine c_ObjectSpawn;
     private Coroutine c_WaveCooldown;
@@ -80,13 +85,22 @@ public class WaveSpawner : NetworkBehaviour
     {
         int waveToSpawn = m_CurrentWave.Value % m_MaxWave;
 
-        if (waveToSpawn == 0)
+        if (DoneOnce)
         {
-            m_CurrentRound.Value++;
-            waveDifficulty *= RoundMultiplier;
-            onRoundCompletedEvent?.Invoke(new RoundCompletedStruct());
+            if (waveToSpawn == 0)
+            {
+                OneRoundComplete = true;
+                m_CurrentRound.Value++;
+                waveDifficulty *= RoundMultiplier;
+                onRoundCompletedEvent?.Invoke(new RoundCompletedStruct());
+
+                if(LoopLastRound)
+                    waveToSpawn = m_MaxWave - 1;
+            }
         }
 
+        DoneOnce = true;
+        
         m_ObjectsLeft = Waves[waveToSpawn].ObjectAmount;
 
         for (int i = 0; i < Waves[waveToSpawn].ObjectAmount; i++)

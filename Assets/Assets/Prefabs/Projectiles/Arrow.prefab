@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3725457984
+  GlobalObjectIdHash: 2673895038
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -189,7 +189,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.3301887, g: 0, b: 0.2488589, a: 1}
+  m_Color: {r: 0.31132078, g: 0.14013149, b: 0.036712352, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   m_Speed:
-    m_InternalValue: 10
+    m_InternalValue: 6
   m_Acceleration:
     m_InternalValue: 0.1
 --- !u!114 &4503792492372330915
@@ -276,10 +276,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   m_MinDamage:
-    m_InternalValue: 1
+    m_InternalValue: 4
   m_MaxDamage:
-    m_InternalValue: 2
+    m_InternalValue: 5
   m_DamageMultiplier:
     m_InternalValue: 1
   m_DamageType:
-    m_InternalValue: 0
+    m_InternalValue: 2

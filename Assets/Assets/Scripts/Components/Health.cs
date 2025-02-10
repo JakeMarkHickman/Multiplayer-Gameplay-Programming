@@ -111,21 +111,17 @@ public class Health : NetworkBehaviour
         int randomSound = Random.Range(0, m_DamageAudio.Length);
         AudioManager.Instance.PlayAudio(m_DamageAudio[randomSound], false);
         onHealthChanged?.Invoke(new HealthChangeStruct(damage, changeInHealth, tag));
-        Debug.Log(gameObject.name + " has been damaged by " + tag + " for " + damage);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
     private void MaxHealthChangedClientRPC(float damage, float changeInHealth, string tag)
     {
         onMaxHealthChanged?.Invoke(new MaxHealthChangeStruct(damage, changeInHealth, tag));
-        Debug.Log(gameObject.name + " has had max health damaged by " + tag + " for " + damage);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
     private void DeathRPC(string dealer)
     {
-        
-        
         int randomSound = Random.Range(0, m_DeathAudio.Length);
         AudioManager.Instance.PlayAudio(m_DeathAudio[randomSound], false);
         onDeath?.Invoke(new DeathStruct(dealer));

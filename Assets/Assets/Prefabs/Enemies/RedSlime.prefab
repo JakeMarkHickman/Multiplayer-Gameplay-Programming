@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 8126897432256745089}
   - component: {fileID: 8982763559882112433}
   - component: {fileID: 8820633663878914335}
-  - component: {fileID: 5891463422753983860}
   - component: {fileID: 3989067052643312772}
   - component: {fileID: 4439711688543608103}
   - component: {fileID: 7291453122918238421}
@@ -268,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   moveScript: {fileID: 8982763559882112433}
-  hand: {fileID: 5891463422753983860}
+  hand: {fileID: 0}
   TargetTag: Player
   SearchDistance: 10
   AttackDistance: 3
@@ -308,20 +307,6 @@ MonoBehaviour:
     m_InternalValue: 1
   m_Acceleration:
     m_InternalValue: 0.1
---- !u!114 &5891463422753983860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3293917951467302500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48f4da1f90b2db14bbef494eff1e9f2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  m_Item: {fileID: 8524426037681309366, guid: 512fc7476cf55c54e946173441c2e74c, type: 3}
 --- !u!114 &3989067052643312772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   m_Resistance:
-    m_InternalValue: 0
+    m_InternalValue: 1
 --- !u!114 &7291453122918238421
 MonoBehaviour:
   m_ObjectHideFlags: 0

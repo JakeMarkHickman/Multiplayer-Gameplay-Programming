@@ -14,6 +14,14 @@ public class WeaponPickup : NetworkBehaviour
         if (collision.gameObject.TryGetComponent<MainHand>(out MainHand mainComp))
         {
             mainComp.SetItem(item);
+            DestroyPickupRPC();
         }
+    }
+
+    [Rpc(SendTo.Server)]
+
+    private void DestroyPickupRPC()
+    {
+        this.gameObject.GetComponent<NetworkObject>().Despawn(true);
     }
 }
