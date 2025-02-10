@@ -38,8 +38,8 @@ public class WaveSpawner : NetworkBehaviour
 
     [SerializeField] private float waveDifficulty = 1;
 
-    public event Action<WaveCompletedStruct> onWaveCompletedEvent;
-    public event Action<RoundCompletedStruct> onRoundCompletedEvent;
+    public event Action onWaveCompletedEvent;
+    public event Action onRoundCompletedEvent;
     
     private bool m_OnCooldown = false;
 
@@ -92,7 +92,7 @@ public class WaveSpawner : NetworkBehaviour
                 OneRoundComplete = true;
                 m_CurrentRound.Value++;
                 waveDifficulty *= RoundMultiplier;
-                onRoundCompletedEvent?.Invoke(new RoundCompletedStruct());
+                onRoundCompletedEvent?.Invoke();
 
                 if(LoopLastRound)
                     waveToSpawn = m_MaxWave - 1;
@@ -166,7 +166,7 @@ public class WaveSpawner : NetworkBehaviour
         if(m_ObjectsLeft <= 0)
         {
             c_WaveCooldown = StartCoroutine(c_WaveFinished());
-            onWaveCompletedEvent?.Invoke(new WaveCompletedStruct());
+            onWaveCompletedEvent?.Invoke();
         }
     }
 }

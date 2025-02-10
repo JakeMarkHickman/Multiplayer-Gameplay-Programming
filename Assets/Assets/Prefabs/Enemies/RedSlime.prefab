@@ -336,7 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   m_Resistance:
-    m_InternalValue: 1
+    m_InternalValue: 2
 --- !u!114 &7291453122918238421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,7 +484,7 @@ MonoBehaviour:
   m_DamageMultiplier:
     m_InternalValue: 1
   m_DamageType:
-    m_InternalValue: 0
+    m_InternalValue: 2
 --- !u!198 &3674377134471945846
 ParticleSystem:
   m_ObjectHideFlags: 0

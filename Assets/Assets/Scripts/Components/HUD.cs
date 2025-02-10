@@ -60,7 +60,7 @@ public class HUD : NetworkBehaviour
         healthBar.title = m_HealthComp.GetHealth() + " / " + m_HealthComp.GetMaxHealth();
     }
     
-    private void OnRoundCompleted(RoundCompletedStruct data)
+    private void OnRoundCompleted()
     {
         if (!IsServer)
             return;
@@ -69,7 +69,7 @@ public class HUD : NetworkBehaviour
         UpdateWaveRoundDataRPC();
     }
     
-    private void OnWaveCompleted(WaveCompletedStruct data)
+    private void OnWaveCompleted()
     {
         if (!IsServer)
             return;
