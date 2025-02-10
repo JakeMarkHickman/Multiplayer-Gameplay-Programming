@@ -1,10 +1,11 @@
+using Mono.Cecil;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class MainHand : NetworkBehaviour
 {
-    [SerializeField] public NetworkObject m_Item;
+    [SerializeField] private NetworkObject m_Item;
 
     public void Handle_OnAttack(InputAction.CallbackContext context)
     {
@@ -24,5 +25,10 @@ public class MainHand : NetworkBehaviour
             return;
 
         item.Use(gameObject.GetComponent<NetworkObject>());
+    }
+
+    public void SetItem(NetworkObject value)
+    {
+        m_Item = value;
     }
 }

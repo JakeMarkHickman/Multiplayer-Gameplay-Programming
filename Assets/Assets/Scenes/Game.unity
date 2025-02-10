@@ -2297,7 +2297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: Waves.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: Waves.Array.data[0].ObjectAmount
@@ -2305,6 +2305,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: Waves.Array.data[1].ObjectAmount
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
+      propertyPath: Waves.Array.data[2].ObjectAmount
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
@@ -2316,6 +2320,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
+      propertyPath: Waves.Array.data[2].SpawnCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: Waves.Array.data[0].ObjectsToSpawn.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -2324,9 +2332,13 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
+      propertyPath: Waves.Array.data[2].ObjectsToSpawn.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: 'Waves.Array.data[0].ObjectsToSpawn.Array.data[0]'
       value: 
-      objectReference: {fileID: 6099158850244456016, guid: ad1a3e88115174b4e94caefb01fd2416, type: 3}
+      objectReference: {fileID: 6099158850244456016, guid: bcb1ce24d47a8df40aae0b6afabb3769, type: 3}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: 'Waves.Array.data[0].ObjectsToSpawn.Array.data[1]'
       value: 
@@ -2342,13 +2354,25 @@ PrefabInstance:
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: 'Waves.Array.data[1].ObjectsToSpawn.Array.data[0]'
       value: 
-      objectReference: {fileID: 6099158850244456016, guid: ad1a3e88115174b4e94caefb01fd2416, type: 3}
+      objectReference: {fileID: 6099158850244456016, guid: bcb1ce24d47a8df40aae0b6afabb3769, type: 3}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: 'Waves.Array.data[1].ObjectsToSpawn.Array.data[1]'
       value: 
-      objectReference: {fileID: 6099158850244456016, guid: 06e6ee875a5cac44291bf53b1966efc1, type: 3}
+      objectReference: {fileID: 6099158850244456016, guid: ad1a3e88115174b4e94caefb01fd2416, type: 3}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
       propertyPath: 'Waves.Array.data[1].ObjectsToSpawn.Array.data[2]'
+      value: 
+      objectReference: {fileID: 6099158850244456016, guid: ad1a3e88115174b4e94caefb01fd2416, type: 3}
+    - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
+      propertyPath: 'Waves.Array.data[2].ObjectsToSpawn.Array.data[0]'
+      value: 
+      objectReference: {fileID: 6099158850244456016, guid: bcb1ce24d47a8df40aae0b6afabb3769, type: 3}
+    - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
+      propertyPath: 'Waves.Array.data[2].ObjectsToSpawn.Array.data[1]'
+      value: 
+      objectReference: {fileID: 6099158850244456016, guid: 06e6ee875a5cac44291bf53b1966efc1, type: 3}
+    - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}
+      propertyPath: 'Waves.Array.data[2].ObjectsToSpawn.Array.data[2]'
       value: 
       objectReference: {fileID: 6099158850244456016, guid: ad1a3e88115174b4e94caefb01fd2416, type: 3}
     - target: {fileID: 1695075139571713714, guid: 06b0b9f437febb14889d877fc020d6bc, type: 3}

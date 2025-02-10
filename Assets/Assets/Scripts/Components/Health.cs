@@ -164,6 +164,9 @@ public class Health : NetworkBehaviour
     {
         float preHealth = GetHealth();
 
+        if(value > GetMaxHealth())
+            value = GetMaxHealth();
+
         m_Health.Value = value;
         HealthChangedClientRPC(value, preHealth - value, tag);
     }
