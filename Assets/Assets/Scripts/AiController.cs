@@ -7,7 +7,6 @@ using UnityEngine;
 public class AiController : NetworkBehaviour
 {
     [SerializeField] Movement moveScript;
-    [SerializeField] MainHand hand;
     
     [SerializeField] string TargetTag;
     [SerializeField] float SearchDistance = 20.0f;

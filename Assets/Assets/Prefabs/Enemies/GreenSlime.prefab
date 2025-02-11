@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1642991530
+  GlobalObjectIdHash: 2182592486
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -267,11 +267,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   moveScript: {fileID: 8982763559882112433}
-  hand: {fileID: 0}
   TargetTag: Player
   SearchDistance: 15
   AttackDistance: 1
-  AttackCooldown: 1
+  AttackCooldown: 1.5
   Target: {fileID: 0}
 --- !u!114 &8982763559882112433
 MonoBehaviour:
@@ -351,9 +350,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   m_MaxHealth:
-    m_InternalValue: 1
+    m_InternalValue: 2
   m_Health:
-    m_InternalValue: 1
+    m_InternalValue: 3
   m_DamageAudio:
   - {fileID: 8300000, guid: c15e029cca4870c42997084495e75df1, type: 3}
   - {fileID: 8300000, guid: 25b2466ab0279ad49995fb3f41f1227d, type: 3}
